@@ -33,8 +33,6 @@ jobs:
       run: npx tsc
     - name: Polymer
       run: npx polymer build
-    - name: LS Node...
-      run: ls -r node_modules/dock-spawn-ts
     - name: Copy css and rest
       run: |
         npx copyfiles --verbose "node_modules/**/*.css" build/default
@@ -47,9 +45,6 @@ jobs:
         npx copyfiles --verbose "assets/**/*.png" build/default
         npx copyfiles --verbose "assets/**/*.css" build/default
         npx copyfiles --verbose "*.json" build/default
-    - name: Copy ace js again (why????)
-      run: |
-        npx copyfiles --verbose "node_modules/ace-builds/**/*.js" build/default
     #- name: Setup upterm session (for debugging, see https://github.com/marketplace/actions/debugging-with-ssh)
     #  uses: lhotari/action-upterm@v1
     - name: Deploy 🚀
