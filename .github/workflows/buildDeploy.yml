@@ -1,0 +1,60 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches: [ master ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: npm install
+      run: npm install
+    - name: web-component-designer upgrade
+      run: npm i git+https://git@github.com/node-projects/web-component-designer.git
+    - name: Copy js & json
+      run: |
+        npx copyfiles --verbose "node_modules/**/*.js" build/default
+        npx copyfiles --verbose "node_modules/**/*.json" build/default
+    - name: Compile web-component-designer
+      run: |
+        cd ./node_modules/@node-projects/web-component-designer
+        npm install
+        npx tsc
+        rm -r node_modules
+    - name: Typescript
+      run: npx tsc
+    - name: Polymer
+      run: npx polymer build
+    - name: LS Node...
+      run: ls -r node_modules/dock-spawn-ts
+    - name: Copy css and rest
+      run: |
+        npx copyfiles --verbose "node_modules/**/*.css" build/default
+        npx copyfiles --verbose "node_modules/**/*.json" build/default
+        npx copyfiles --verbose "node_modules/**/*.png" build/default
+        npx copyfiles --verbose "node_modules/**/*.gif" build/default
+        npx copyfiles --verbose "node_modules/**/*.jpg" build/default
+        npx copyfiles --verbose "node_modules/**/*.woff" build/default
+        npx copyfiles --verbose "node_modules/**/*.ttf" build/default
+        npx copyfiles --verbose "assets/**/*.png" build/default
+        npx copyfiles --verbose "assets/**/*.css" build/default
+        npx copyfiles --verbose "*.json" build/default
+    - name: Copy ace js again (why????)
+      run: |
+        npx copyfiles --verbose "node_modules/ace-builds/**/*.js" build/default
+    #- name: Setup upterm session (for debugging, see https://github.com/marketplace/actions/debugging-with-ssh)
+    #  uses: lhotari/action-upterm@v1
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.1
+      with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: build/default # The folder the action should deploy.

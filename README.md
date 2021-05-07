@@ -2,6 +2,10 @@
 
 Demonstration Project using https://github.com/node-projects/web-component-designer
 
+## url of demo project
+
+https://node-projects.github.io/web-component-designer-simple-demo/index.html
+
 ## Developing
 
   * Install dependencies
