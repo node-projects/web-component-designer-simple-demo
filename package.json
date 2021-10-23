@@ -20,11 +20,11 @@
   "devDependencies": {
     "copyfiles": "^2.4.1",
     "polymer-cli": "^1.9.11",
-    "typescript": "^4.3.2"
+    "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@node-projects/base-custom-webcomponent": "0.0.230",
-    "@node-projects/web-component-designer": "git+https://git@github.com/node-projects/web-component-designer.git",
-    "construct-style-sheets-polyfill": "^2.4.16"
+    "@node-projects/base-custom-webcomponent": "0.1.4",
+    "@node-projects/web-component-designer": "^0.0.17",
+    "construct-style-sheets-polyfill": "^3.0.4"
   }
 }
