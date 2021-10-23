@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@node-projects/base-custom-webcomponent": "0.1.6",
-    "@node-projects/web-component-designer": "^0.0.17",
+    "@node-projects/web-component-designer": "^0.0.19",
     "construct-style-sheets-polyfill": "^3.0.4"
   }
 }
