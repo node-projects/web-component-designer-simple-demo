@@ -23,7 +23,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@node-projects/base-custom-webcomponent": "0.1.4",
+    "@node-projects/base-custom-webcomponent": "0.1.5",
     "@node-projects/web-component-designer": "^0.0.17",
     "construct-style-sheets-polyfill": "^3.0.4"
   }
