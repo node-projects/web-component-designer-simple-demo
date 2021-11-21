@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "tsc": "tsc",
-    "serve": "polymer serve"
+    "start": "web-dev-server --node-resolve --open"
   },
   "repository": {
     "type": "git",
@@ -18,8 +18,9 @@
   },
   "homepage": "https://github.com/node-projects/web-component-designer-simple-demo#readme",
   "devDependencies": {
+    "@web/dev-server": "^0.1.28",
     "copyfiles": "^2.4.1",
-    "polymer-cli": "^1.9.11",
+    "gulp": "^4.0.2",
     "typescript": "^4.5.2"
   },
   "dependencies": {
