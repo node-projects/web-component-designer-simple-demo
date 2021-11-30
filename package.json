@@ -24,8 +24,8 @@
     "typescript": "^4.5.2"
   },
   "dependencies": {
-    "@node-projects/base-custom-webcomponent": "0.3.0",
-    "@node-projects/web-component-designer": "^0.0.40",
+    "@node-projects/base-custom-webcomponent": "0.3.4",
+    "@node-projects/web-component-designer": "^0.0.50",
     "construct-style-sheets-polyfill": "^3.0.4"
   }
 }
