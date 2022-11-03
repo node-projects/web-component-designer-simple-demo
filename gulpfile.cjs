@@ -14,6 +14,7 @@ function fixJsImports() {
 
                     var checkImportRegex = RegExp('(import|export)(\\s*\\{?\\*?[\\s\\w,$]*\\}?\\s*(as)?[\\s\\w{}]*from\\s*|[\\s]*)[\'"]([^\\.\\/][\\w\\/\\-@.]*?)[\'"]', 'g');
                     var checkRelativeImportRegex = RegExp('(import|export)(\\s*\\{?\\*?[\\s\\w,$]*\\}?\\s*(as)?[\\s\\w{}]*from\\s*|[\\s]*)[\'"]([\\.\\/][\\w\\/\\-@.]*?)[\'"]', 'g');
+                    var dynamicImportRegex = RegExp('(import\\s*\\(\\s*[\'"])([^\\.\\/][\\w\\/\\-@.]*?)([\'"]\\s*[,)])', 'g');
 
                     var pos = 0;
                     var res = '';
@@ -37,6 +38,20 @@ function fixJsImports() {
                         if (newValue != currentValue) {
                             res += code.substr(pos, m.index - pos);
                             res += m[1] + m[2] + "'" + newValue + "'";
+                            pos = m.index + m[0].length;
+                        }
+                    }
+                    res += code.substr(pos, code.length - pos);
+                    code = res;
+
+                    pos = 0;
+                    res = '';
+                    while ((m = dynamicImportRegex.exec(code)) !== null) {
+                        var currentValue = m[2];
+                        var newValue = buildImportName(currentValue, file.dirname);
+                        if (newValue != currentValue) {
+                            res += code.substr(pos, m.index - pos);
+                            res += m[1] + newValue + m[3];
                             pos = m.index + m[0].length;
                         }
                     }
