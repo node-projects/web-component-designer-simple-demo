@@ -99,6 +99,19 @@ function buildImportFileName(importText, dirName = '') {
     }
     if (fs.existsSync(path.join(dirName, iPath, 'package.json'))) {
         var json = JSON.parse(fs.readFileSync(path.join(dirName, iPath, 'package.json'), 'utf8'));
+        if (json.exports && json.exports.import)
+		{
+            var module = json.exports.import.toString();
+			if (fs.existsSync(path.join(dirName, iPath, module)) && !fs.lstatSync(path.join(dirName, iPath, module)).isDirectory()) {
+				return importText.endsWith('/') ? module : '/' + module;
+			}
+			if (fs.existsSync(path.join(dirName, iPath, module + '.js'))) {
+				return importText.endsWith('/') ? module + '.js' : '/' + module + '.js';
+			}
+			if (fs.existsSync(path.join(dirName, iPath, module, 'index.js'))) {
+				return importText.endsWith('/') ? module + '/index.js' : '/' + module + '/index.js';
+			}
+        }
         if (json.module)
 		{
 			var module = json.module.toString();
