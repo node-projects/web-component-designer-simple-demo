@@ -18,13 +18,14 @@
   },
   "homepage": "https://github.com/node-projects/web-component-designer-simple-demo#readme",
   "devDependencies": {
-    "@web/dev-server": "^0.4.5",
+    "@types/node": "^25.6.0",
+    "@web/dev-server": "^0.4.6",
     "copyfiles": "^2.4.1",
-    "typescript": "^5.4.5"
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@node-projects/base-custom-webcomponent": "0.27.6",
-    "@node-projects/web-component-designer": "^0.1.170",
-    "es-module-shims": "^1.10.0"
+    "@node-projects/base-custom-webcomponent": "0.46.0",
+    "@node-projects/web-component-designer": "^0.2.5",
+    "es-module-shims": "^2.8.0"
   }
 }
