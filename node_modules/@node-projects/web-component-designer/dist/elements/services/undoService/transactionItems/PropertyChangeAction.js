@@ -1,0 +1,34 @@
+import { setDeepValue } from '../../../helper/Helper.js';
+export class PropertyChangeAction {
+    constructor(designItem, name, newValue, oldValue) {
+        this.title = "Change Property " + name + " of &lt;" + designItem.name + "&gt;";
+        this.designItem = designItem;
+        this.name = name;
+        this.newValue = newValue;
+        this.oldValue = oldValue;
+    }
+    title;
+    get affectedItems() {
+        return [this.designItem];
+    }
+    undo() {
+        setDeepValue(this.designItem.node, this.name, this.oldValue);
+        return [{ changeType: 'changed', type: 'property', name: this.name, designItems: [this.designItem] }];
+    }
+    do() {
+        setDeepValue(this.designItem.node, this.name, this.newValue);
+        return [{ changeType: 'changed', type: 'property', name: this.name, designItems: [this.designItem] }];
+    }
+    designItem;
+    name;
+    newValue;
+    oldValue;
+    mergeWith(other) {
+        if (other instanceof PropertyChangeAction && this.designItem === other.designItem && this.name === other.name) {
+            this.newValue = other.newValue;
+            return true;
+        }
+        return false;
+    }
+}
+//# sourceMappingURL=PropertyChangeAction.js.map
